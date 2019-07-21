@@ -1,76 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset='utf-8' />
-<link href='packages/core/main.css' rel='stylesheet' />
-<link href='packages/daygrid/main.css' rel='stylesheet' />
-<link href='packages/list/main.css' rel='stylesheet' />
-<script src='packages/core/main.js'></script>
-<script src='packages/interaction/main.js'></script>
-<script src='packages/daygrid/main.js'></script>
-<script src='packages/list/main.js'></script>
-<script src='packages/google-calendar/main.js'></script>
-<script>
+  <meta charset='utf-8' />
+  <title>eCalendar RISKA</title>
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+  <link href='packages/core/main.css' rel='stylesheet' />
+  <link href='packages/daygrid/main.css' rel='stylesheet' />
+  <link href='packages/list/main.css' rel='stylesheet' />
+  <script src='packages/core/main.js'></script>
+  <script src='packages/interaction/main.js'></script>
+  <script src='packages/daygrid/main.js'></script>
+  <script src='packages/list/main.js'></script>
+  <script src='packages/google-calendar/main.js'></script>
+  <script>
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
 
-      plugins: [ 'interaction', 'dayGrid', 'list', 'googleCalendar' ],
+      var calendar = new FullCalendar.Calendar(calendarEl, {
 
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,listYear'
-      },
+        plugins: [ 'interaction', 'dayGrid', 'list', 'googleCalendar' ],
 
-      displayEventTime: false, // don't show the time column in list view
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,listYear'
+        },
 
-      googleCalendarApiKey: 'AIzaSyB02gifJqDWwSxRguO8utQRev6rje2q6I8',
+        displayEventTime: false, // don't show the time column in list view
 
-      events: 'sekum.riskaorid@gmail.com',
+        googleCalendarApiKey: 'AIzaSyB02gifJqDWwSxRguO8utQRev6rje2q6I8',
 
-      eventClick: function(arg) {
-        // opens events in a popup window
-        window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+        events: 'sekum.riskaorid@gmail.com',
 
-        arg.jsEvent.preventDefault() // don't navigate in main tab
-      },
+        eventClick: function(arg) {
+          // opens events in a popup window
+          window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
 
-      loading: function(bool) {
-        document.getElementById('loading').style.display =
-          bool ? 'block' : 'none';
-      }
+          arg.jsEvent.preventDefault() // don't navigate in main tab
+        },
 
+        loading: function(bool) {
+          document.getElementById('loading').style.display =
+            bool ? 'block' : 'none';
+        }
+
+      });
+
+      calendar.render();
     });
 
-    calendar.render();
-  });
+  </script>
+  <style>
 
-</script>
-<style>
+    body {
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
 
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
+    #loading {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
 
-  #loading {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-</style>
+  </style>
 </head>
 <body>
 
