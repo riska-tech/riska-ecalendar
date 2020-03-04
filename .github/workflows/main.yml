@@ -1,0 +1,24 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: Create Release Branch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get version
+        id: get_version
+        run: |
+          version=${GITHUB_REF#refs/tags/}
+          echo ::set-output name=VERSION::$version
+      - name: Create branch
+        uses: peterjgrainger/action-create-branch@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: release/${{ steps.get_version.outputs.VERSION }}
